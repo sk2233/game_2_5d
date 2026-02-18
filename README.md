@@ -8,3 +8,5 @@ y(深度)轴与z(高度)轴缩放为原来的 1/2 <br>
 <br>
 效果
 ![img_2.png](img_2.png)
+
+https://github.com/user-attachments/assets/2cf336a8-16ba-4462-b003-1155e962cb01
