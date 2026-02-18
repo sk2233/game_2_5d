@@ -1,0 +1,4 @@
+/.idea/
+vendor
+*.tiled-project
+*.tiled-session
