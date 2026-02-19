@@ -27,6 +27,7 @@ type Player0 struct {
 	State    int
 	Actions  []func()
 	LieTimer int
+	Shadow   *ebiten.Image
 }
 
 func (p *Player0) Update() {
@@ -137,6 +138,10 @@ func (p *Player0) Lie() {
 }
 
 func (p *Player0) Draw(screen *ebiten.Image) {
+	pos := p.Pos
+	pos.Z = RangeManager.GetZ(pos)
+	pos = ToVec2(pos)
+	DrawImage(screen, p.Shadow, pos.X-6, pos.Y-2)
 	p.Anim.Draw(screen, ToVec2(p.Pos), p.Dir)
 }
 
@@ -154,7 +159,7 @@ func (p *Player0) AnimEnd(anim *Anim) {
 }
 
 func NewPlayer() *Player0 {
-	res := &Player0{Anim: NewAnimator(), State: PlayerMove, Dir: 1}
+	res := &Player0{Anim: NewAnimator(), State: PlayerMove, Dir: 1, Shadow: LoadImage("resources/player/shadow.png")}
 	res.Anim.AddAnim(NewAnim("resources/player/hurt").SetPivot(PivotBottom))
 	res.Anim.AddAnim(NewAnim("resources/player/idle").SetPivot(PivotBottom))
 	res.Anim.AddAnim(NewAnim("resources/player/jump").SetPivot(PivotBottom).SetFps(10).FreezeFrame(1))

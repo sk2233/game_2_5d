@@ -1,11 +1,13 @@
 package main
 
 import (
+	"image/color"
 	"os"
 	"path"
 
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/ebitenutil"
+	"github.com/hajimehoshi/ebiten/v2/vector"
 )
 
 func HandleErr(err error) {
@@ -69,4 +71,20 @@ func BatchCheck(checkers ...func() bool) bool {
 		}
 	}
 	return false
+}
+
+func FillRect(screen *ebiten.Image, x, y, width, height float64, clr color.Color) {
+	x -= Camera.X
+	vector.FillRect(screen, float32(x), float32(y), float32(width), float32(height), clr, false)
+}
+
+var (
+	option = &ebiten.DrawImageOptions{}
+)
+
+func DrawImage(screen *ebiten.Image, image *ebiten.Image, x, y float64) {
+	x -= Camera.X
+	option.GeoM.Reset()
+	option.GeoM.Translate(x, y)
+	screen.DrawImage(image, option)
 }
