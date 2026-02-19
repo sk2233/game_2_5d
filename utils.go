@@ -61,3 +61,12 @@ func Sign(val float64) float64 {
 		return 0
 	}
 }
+
+func BatchCheck(checkers ...func() bool) bool {
+	for _, checker := range checkers {
+		if checker() {
+			return true
+		}
+	}
+	return false
+}

@@ -142,7 +142,7 @@ func (t *TrapRange) Update() {
 	}
 	z := t.GetZ(Player.Pos)
 	if Player.Pos.Z >= z && Player.Pos.Z <= z+t.Height {
-		Player.Hurt()
+		Player.TriggerHurt()
 	}
 }
 
